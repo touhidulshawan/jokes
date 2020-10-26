@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import * as React from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Jokes from "./components/Jokes";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export interface JokesProp {
+  id: number;
+  type: string;
+  setup: string;
+  punchline: string;
 }
+
+const App: React.FC = () => {
+  const [jokes, setJokes] = useState<JokesProp>({
+    id: 166,
+    type: "general",
+    setup: "What did one wall say to the other wall?",
+    punchline: "I'll meet you at the corner!",
+  });
+
+  useEffect(() => {
+    const getJokes = async () => {
+      const response = await axios.get(
+        "https://official-joke-api.appspot.com/random_joke"
+      );
+      setJokes(response.data);
+    };
+    getJokes();
+  }, []);
+
+  return (
+    <main>
+      <h1>Jokes</h1>
+      <Jokes jokes={jokes} />
+    </main>
+  );
+};
 
 export default App;

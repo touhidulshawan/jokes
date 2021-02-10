@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import Jokes from "./components/Jokes";
 import "./App.css";
 
@@ -26,10 +25,11 @@ const App: React.FC = () => {
 
   const handleNewJokes = async () => {
     setLoading(true);
-    const response = await axios.get(
+    const response = await fetch(
       "https://official-joke-api.appspot.com/random_joke"
     );
-    setJokes(response.data);
+    const data = await response.json();
+    setJokes(data);
     setLoading(false);
   };
 
@@ -47,7 +47,9 @@ const App: React.FC = () => {
   return (
     <main className="wrapper">
       <h1 className="title">Jokes</h1>
-      {loading ? renderLoader : renderJokes}
+      <div className="joke__container">
+        {loading ? renderLoader : renderJokes}
+      </div>
     </main>
   );
 };

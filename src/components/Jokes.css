@@ -1,15 +1,32 @@
 .container {
+  max-width: 600px;
   padding: 3rem 1rem;
-  border-bottom: 5px solid #cbd5e0;
   margin-bottom: 20px;
+  background-color: #fffffe;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .textStyle {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   line-height: 2.5rem;
   letter-spacing: 0.05rem;
   color: #4a5568;
+  border-bottom: 3px solid #dddddd;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
 }
+
+.container > p {
+  font-size: 1.3rem;
+  line-height: 2.5rem;
+  letter-spacing: 0.05rem;
+  color: #718096;
+}
+
 .spanStyle {
   text-transform: uppercase;
   background: #718096;
